@@ -5,6 +5,7 @@ using UnityEngine;
 public class CollectPassengers : MonoBehaviour
 {
     [SerializeField] float weight;
+    [SerializeField] float bubbleRotationIncrease;
     [SerializeField] int scoreIncrease;
 
     void OnTriggerEnter2D(Collider2D other) {
@@ -18,7 +19,9 @@ public class CollectPassengers : MonoBehaviour
     //When the collectable touches the player, it will become a child
     void BecomeChild(GameObject bubbleParent){
         PassengerHandler passengerHandler = bubbleParent.transform.parent.GetComponent<PassengerHandler>();
-        passengerHandler.BoardPassenger(transform);
+        //pass this transform to make it a child of the passengerHandler object
+        //pass weight to keep the passenger group close to the bubbles border
+        passengerHandler.BoardPassenger(transform, weight);
     }
 
     //Tell the bubble to increase its size by 'weight' amount
