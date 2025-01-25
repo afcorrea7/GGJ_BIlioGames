@@ -38,6 +38,12 @@ TagManager:
   - 
   - 
   m_SortingLayers:
+  - name: Background
+    uniqueID: 829064287
+    locked: 0
   - name: Default
     uniqueID: 0
+    locked: 0
+  - name: Passengers
+    uniqueID: 3055391177
     locked: 0
