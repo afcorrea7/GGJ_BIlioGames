@@ -7,8 +7,8 @@ using TMPro;
 
 public class Score : MonoBehaviour
 {
-    public static Score Instance; // Referencia estática al ScoreManager
-    public TextMeshProUGUI scoreText; // El texto en el Canvas donde se mostrará el puntaje
+    public static Score Instance; // Referencia estï¿½tica al ScoreManager
+    private TextMeshProUGUI scoreText; // El texto en el Canvas donde se mostrarï¿½ el puntaje
 
     private int currentScore = 0; // Puntaje actual
 
@@ -25,7 +25,11 @@ public class Score : MonoBehaviour
         }
     }
 
-    // Método para agregar puntaje
+    void Start(){
+        scoreText = GetComponentInChildren<TextMeshProUGUI>();
+    }
+
+    // Mï¿½todo para agregar puntaje
     public void AddScore(int scoreToAdd)
     {
         currentScore += scoreToAdd;
