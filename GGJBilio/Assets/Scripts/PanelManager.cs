@@ -1,30 +1,67 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
+using static BubbleDie;
 
 public class PanelManager : MonoBehaviour
 {
-    private GameObject losePanel;
+    [SerializeField] private GameObject losePanel;
+    [SerializeField] private GameObject pausePanel;
 
-    private void Awake()
+    private bool isPaused = false;
+
+    void Update()
     {
-        losePanel = GameObject.Find("Lose Panel");
+        // Detecta si el jugador presiona la tecla Escape
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            TogglePause();
+        }
     }
-    public void ShowLosePanel()
-    {//Llamar el metodo del player donde se define que muere
+    private void OnEnable()
+    {
+        BubbleDie.PlayerLost += OnPlayerLost;
+    }
+
+    private void OnDisable()
+    {
+        BubbleDie.PlayerLost -= OnPlayerLost;
+    }
+    private void OnPlayerLost()
+    {
         Time.timeScale = 0f;
 
         if (losePanel != null)
         {
             losePanel.SetActive(true);
         }
-    }
-    public void RestartGame()
-    {
-        Time.timeScale = 1f;
-        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
-    }
 
+    }
+    private void TogglePause()
+    {
+        isPaused = !isPaused;
+
+        if (isPaused)
+        {
+            Time.timeScale = 0f;
+            if (pausePanel != null)
+                pausePanel.SetActive(true);
+        }
+        else
+        {
+            ResumeGame();
+        }
+    }
+    public void ResumeGame()
+    {
+        isPaused = false;
+        Time.timeScale = 1f;
+        if (pausePanel != null)
+            pausePanel.SetActive(false);
+        Debug.Log("vOLVI AL JUEG0");
+
+    }
 }
