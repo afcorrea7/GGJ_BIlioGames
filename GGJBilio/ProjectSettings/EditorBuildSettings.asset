@@ -14,4 +14,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Menu.unity
     guid: 952016cc3d6988341b691d4ce67903e5
+  - enabled: 1
+    path: Assets/Scenes/CollectablesTest.unity
+    guid: 99a5b794716b9b447bc6c45451a0da64
   m_configObjects: {}
