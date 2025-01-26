@@ -136,7 +136,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   weight: 0.05
-  scoreIncrease: 0
+  scoreIncrease: 500
   collectedClip: {fileID: 8300000, guid: 722db51a02d16854db90b33dce83af70, type: 3}
 --- !u!95 &6350858939489892789
 Animator:
