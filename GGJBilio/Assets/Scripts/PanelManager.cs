@@ -7,6 +7,7 @@ public class PanelManager : MonoBehaviour
     [SerializeField] private GameObject losePanel;
     [SerializeField] private GameObject pausePanel;
     [SerializeField] private GameObject hudPanel;  // El HUD que quieres manejar
+    [SerializeField] private GameObject winPanel;
     private bool isPaused = false;
 
     // Lista de paneles
@@ -14,7 +15,7 @@ public class PanelManager : MonoBehaviour
 
     void Start()
     {
-        // Añadir los paneles a la lista
+        // Aï¿½adir los paneles a la lista
         panels.Add(losePanel);
         panels.Add(pausePanel);
         panels.Add(hudPanel);
@@ -32,11 +33,17 @@ public class PanelManager : MonoBehaviour
     private void OnEnable()
     {
         BubbleDie.PlayerLost += OnPlayerLost;
+        WinZone.OnPlayerWin += ShowWinPanel;
     }
 
     private void OnDisable()
     {
         BubbleDie.PlayerLost -= OnPlayerLost;
+        WinZone.OnPlayerWin -= ShowWinPanel;
+    }
+
+    private void ShowWinPanel(){
+        ActivatePanel(winPanel);
     }
 
     private void OnPlayerLost()
@@ -45,7 +52,7 @@ public class PanelManager : MonoBehaviour
         ActivatePanel(losePanel);
     }
 
-    // Función de pausa
+    // Funciï¿½n de pausa
     public void TogglePause()
     {
         isPaused = !isPaused;
@@ -65,17 +72,17 @@ public class PanelManager : MonoBehaviour
         Time.timeScale = 1f;
         DeactivateAllPanels();  // Desactiva todos los paneles
         hudPanel.SetActive(true);  // Activa el HUD
-        Debug.Log("Volví al juego");
+        Debug.Log("Volvï¿½ al juego");
     }
 
-    // Método para activar un panel y desactivar los demás
+    // Mï¿½todo para activar un panel y desactivar los demï¿½s
     private void ActivatePanel(GameObject panelToActivate)
     {
         DeactivateAllPanels();  // Primero desactivamos todos
-        panelToActivate.SetActive(true);  // Activamos el panel específico
+        panelToActivate.SetActive(true);  // Activamos el panel especï¿½fico
     }
 
-    // Método para desactivar todos los paneles
+    // Mï¿½todo para desactivar todos los paneles
     private void DeactivateAllPanels()
     {
         foreach (var panel in panels)
