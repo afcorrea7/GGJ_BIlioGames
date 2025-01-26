@@ -1,18 +1,24 @@
 using System.Collections;
 using System.Collections.Generic;
-using TMPro;
 using UnityEngine;
-using UnityEngine.SceneManagement;
-using UnityEngine.UI;
-using static BubbleDie;
 
 public class PanelManager : MonoBehaviour
 {
-    [SerializeField] private GameObject winPanel;
     [SerializeField] private GameObject losePanel;
     [SerializeField] private GameObject pausePanel;
-
+    [SerializeField] private GameObject hudPanel;  // El HUD que quieres manejar
     private bool isPaused = false;
+
+    // Lista de paneles
+    private List<GameObject> panels = new List<GameObject>();
+
+    void Start()
+    {
+        // Añadir los paneles a la lista
+        panels.Add(losePanel);
+        panels.Add(pausePanel);
+        panels.Add(hudPanel);
+    }
 
     void Update()
     {
@@ -22,62 +28,59 @@ public class PanelManager : MonoBehaviour
             TogglePause();
         }
     }
+
     private void OnEnable()
     {
-        BubbleDie.PlayerLost += ActivateGameOverPanel;
-        WinZone.OnPlayerWin += ActivateWinPanel;
+        BubbleDie.PlayerLost += OnPlayerLost;
     }
 
     private void OnDisable()
     {
-        BubbleDie.PlayerLost -= ActivateGameOverPanel;
-        WinZone.OnPlayerWin -= ActivateWinPanel;
-
+        BubbleDie.PlayerLost -= OnPlayerLost;
     }
-    private void ActivateGameOverPanel()
+
+    private void OnPlayerLost()
     {
         Time.timeScale = 0f;
-
-        if (losePanel != null)
-        {
-            losePanel.SetActive(true);
-        }
+        ActivatePanel(losePanel);
     }
 
-    void ActivateWinPanel(){
-        if (winPanel != null){
-            winPanel.SetActive(true);
-        }
-    }
-
-    private void TogglePause()
+    // Función de pausa
+    public void TogglePause()
     {
         isPaused = !isPaused;
-
         if (isPaused)
         {
-            PauseGame();
+            Time.timeScale = 0f;
+            ActivatePanel(pausePanel);
         }
         else
         {
             ResumeGame();
         }
     }
-
-    public void PauseGame(){
-        Time.timeScale = 0f;
-        if (pausePanel != null){
-            pausePanel.SetActive(true);
-        }
-    }
-
     public void ResumeGame()
     {
         isPaused = false;
         Time.timeScale = 1f;
-        if (pausePanel != null){
-            pausePanel.SetActive(false);
+        DeactivateAllPanels();  // Desactiva todos los paneles
+        hudPanel.SetActive(true);  // Activa el HUD
+        Debug.Log("Volví al juego");
+    }
+
+    // Método para activar un panel y desactivar los demás
+    private void ActivatePanel(GameObject panelToActivate)
+    {
+        DeactivateAllPanels();  // Primero desactivamos todos
+        panelToActivate.SetActive(true);  // Activamos el panel específico
+    }
+
+    // Método para desactivar todos los paneles
+    private void DeactivateAllPanels()
+    {
+        foreach (var panel in panels)
+        {
+            panel.SetActive(false);  // Desactivamos todos los paneles
         }
-        Debug.Log("VOLVI AL JUEG0");
     }
 }
