@@ -9,6 +9,7 @@ public class Score : MonoBehaviour
 {
     public static Score Instance; // Referencia est�tica al ScoreManager
     private TextMeshProUGUI scoreText; // El texto en el Canvas donde se mostrar� el puntaje
+    [SerializeField] private TextMeshProUGUI finalScoreText; // El texto en el Canvas donde se mostrar� el puntaje
 
     private int currentScore = 0; // Puntaje actual
 
@@ -27,6 +28,7 @@ public class Score : MonoBehaviour
 
     void Start(){
         scoreText = GetComponentInChildren<TextMeshProUGUI>();
+        finalScoreText = GetComponent<TextMeshProUGUI>();
     }
 
     // M�todo para agregar puntaje
@@ -40,5 +42,6 @@ public class Score : MonoBehaviour
     private void UpdateScoreUI()
     {
         scoreText.text = "Score: " + currentScore.ToString();
+        finalScoreText.text = "Score: " + currentScore.ToString();
     }
 }

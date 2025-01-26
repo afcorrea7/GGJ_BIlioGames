@@ -1,17 +1,24 @@
 using System.Collections;
 using System.Collections.Generic;
-using TMPro;
 using UnityEngine;
-using UnityEngine.SceneManagement;
-using UnityEngine.UI;
-using static BubbleDie;
 
 public class PanelManager : MonoBehaviour
 {
     [SerializeField] private GameObject losePanel;
     [SerializeField] private GameObject pausePanel;
-
+    [SerializeField] private GameObject hudPanel;  // El HUD que quieres manejar
     private bool isPaused = false;
+
+    // Lista de paneles
+    private List<GameObject> panels = new List<GameObject>();
+
+    void Start()
+    {
+        // Añadir los paneles a la lista
+        panels.Add(losePanel);
+        panels.Add(pausePanel);
+        panels.Add(hudPanel);
+    }
 
     void Update()
     {
@@ -21,6 +28,7 @@ public class PanelManager : MonoBehaviour
             TogglePause();
         }
     }
+
     private void OnEnable()
     {
         BubbleDie.PlayerLost += OnPlayerLost;
@@ -30,25 +38,21 @@ public class PanelManager : MonoBehaviour
     {
         BubbleDie.PlayerLost -= OnPlayerLost;
     }
+
     private void OnPlayerLost()
     {
         Time.timeScale = 0f;
-
-        if (losePanel != null)
-        {
-            losePanel.SetActive(true);
-        }
-
+        ActivatePanel(losePanel);
     }
-    private void TogglePause()
+
+    // Función de pausa
+    public void TogglePause()
     {
         isPaused = !isPaused;
-
         if (isPaused)
         {
             Time.timeScale = 0f;
-            if (pausePanel != null)
-                pausePanel.SetActive(true);
+            ActivatePanel(pausePanel);
         }
         else
         {
@@ -59,9 +63,24 @@ public class PanelManager : MonoBehaviour
     {
         isPaused = false;
         Time.timeScale = 1f;
-        if (pausePanel != null)
-            pausePanel.SetActive(false);
-        Debug.Log("vOLVI AL JUEG0");
+        DeactivateAllPanels();  // Desactiva todos los paneles
+        hudPanel.SetActive(true);  // Activa el HUD
+        Debug.Log("Volví al juego");
+    }
 
+    // Método para activar un panel y desactivar los demás
+    private void ActivatePanel(GameObject panelToActivate)
+    {
+        DeactivateAllPanels();  // Primero desactivamos todos
+        panelToActivate.SetActive(true);  // Activamos el panel específico
+    }
+
+    // Método para desactivar todos los paneles
+    private void DeactivateAllPanels()
+    {
+        foreach (var panel in panels)
+        {
+            panel.SetActive(false);  // Desactivamos todos los paneles
+        }
     }
 }
