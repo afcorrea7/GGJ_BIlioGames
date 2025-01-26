@@ -11,7 +11,7 @@ public class CollectPassengers : MonoBehaviour
         if(other.CompareTag("Player")){
             IncreaseParentSize(other.gameObject);
             BecomeChild(other.gameObject);
-            Score.Instance.AddScore(scoreIncrease);
+            Score.Instance?.AddScore(scoreIncrease);
         }
     }
 

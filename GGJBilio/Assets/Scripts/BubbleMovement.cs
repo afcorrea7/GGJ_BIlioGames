@@ -5,9 +5,10 @@ using UnityEngine;
 public class BubbleMovement : MonoBehaviour
 {
     [SerializeField] float bubbleVerticalSpeed = 2f; // velocidad hacia arriba que se incrementa?
+    [SerializeField] ForceMode2D movementForceMode;
     public float maxVerticalSpeed = 5; //max speed increases with each speed zone entered
     [SerializeField] float bubbleHorizontalSpeed = 10f; //velocidad de movimiento horizontal que se incrementa cada cierto numero de puntaje?
-    [SerializeField] float horizontalSpeedReductionFactor = 0.1f; // Factor para reducir la velocidad horizontal al aumentar el tamaño
+    [SerializeField] float horizontalSpeedReductionFactor = 0.1f; // Factor para reducir la velocidad horizontal al aumentar el tamaï¿½o
 
 
     private Rigidbody2D thisRB;
@@ -26,15 +27,26 @@ public class BubbleMovement : MonoBehaviour
 
     void Movement()
     {
-        Vector3 movement = new Vector3(0f, bubbleVerticalSpeed * Time.deltaTime, 0f);
+        //Vector3 movement = new Vector3(0f, bubbleVerticalSpeed * Time.deltaTime, 0f);
         //bubbleVerticalSpeed += Time.deltaTime * 0.1f;
         float bubbleSize = transform.localScale.x;
  
         float horizontalMovement = Input.GetAxis("Horizontal");
 
-        movement.x = horizontalMovement * bubbleHorizontalSpeed * Time.deltaTime;
+        Vector2 force = new Vector2(horizontalMovement * bubbleHorizontalSpeed, 0);
 
-        transform.position += movement;
+        thisRB.AddForce(force, movementForceMode);
+
+        //Disallow exceeding maximum speed
+        CapMovementSpeed();
+    }
+
+    void CapMovementSpeed(){
+        float maxSpeed = 5f; // Adjust maximum speed as needed
+        thisRB.velocity = new Vector2(
+        Mathf.Clamp(thisRB.velocity.x, -maxSpeed, maxSpeed),
+        thisRB.velocity.y
+        );
     }
     //max
     void CapVerticalSpeed()
@@ -46,11 +58,9 @@ public class BubbleMovement : MonoBehaviour
     }
     public void DecreaseHorizontalSpeed()
     {
-        {
-            sizeIncreased = true;
-            bubbleHorizontalSpeed -= horizontalSpeedReductionFactor;  
-            bubbleHorizontalSpeed = Mathf.Max(bubbleHorizontalSpeed, 0);  // Asegura que la velocidad no sea negativa
-            Debug.Log("Horizontal speed reduced to: " + bubbleHorizontalSpeed);
-        }
+        sizeIncreased = true;
+        bubbleHorizontalSpeed -= horizontalSpeedReductionFactor;  
+        bubbleHorizontalSpeed = Mathf.Max(bubbleHorizontalSpeed, 0);  // Asegura que la velocidad no sea negativa
+        Debug.Log("Horizontal speed reduced to: " + bubbleHorizontalSpeed);
     }
 }

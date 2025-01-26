@@ -24,13 +24,13 @@ public class PanelManager : MonoBehaviour
     }
     private void OnEnable()
     {
-        BubbleDie.OnPlayerLost += ActivateGameOverPanel;
+        BubbleDie.PlayerLost += ActivateGameOverPanel;
         WinZone.OnPlayerWin += ActivateWinPanel;
     }
 
     private void OnDisable()
     {
-        BubbleDie.OnPlayerLost -= ActivateGameOverPanel;
+        BubbleDie.PlayerLost -= ActivateGameOverPanel;
         WinZone.OnPlayerWin -= ActivateWinPanel;
 
     }

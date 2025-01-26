@@ -1392,7 +1392,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   endingPoint: {fileID: 1979576904}
-  dragToSpeed: 50
+  dragToSpeed: 5
   bubbleTransform: {fileID: 259767919}
 --- !u!4 &568579770
 Transform:
