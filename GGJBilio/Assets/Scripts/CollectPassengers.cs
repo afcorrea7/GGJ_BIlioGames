@@ -6,11 +6,13 @@ public class CollectPassengers : MonoBehaviour
 {
     [SerializeField] float weight;
     [SerializeField] int scoreIncrease;
+    [SerializeField] AudioClip collectedClip;
 
     void OnTriggerEnter2D(Collider2D other) {
         if(other.CompareTag("Player")){
             IncreaseParentSize(other.gameObject);
             BecomeChild(other.gameObject);
+            PlayCollectedAudio();
             Score.Instance?.AddScore(scoreIncrease);
         }
     }
@@ -27,6 +29,10 @@ public class CollectPassengers : MonoBehaviour
     void IncreaseParentSize(GameObject bubble){
         BubbleSize bubbleSize = bubble.GetComponent<BubbleSize>();
         bubbleSize.IncreaseSize(weight); 
+    }
+
+    void PlayCollectedAudio(){
+        GetComponent<AudioSource>().PlayOneShot(collectedClip);
     }
     
 }

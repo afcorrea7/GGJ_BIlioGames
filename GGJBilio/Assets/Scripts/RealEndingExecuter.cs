@@ -7,6 +7,7 @@ public class RealEndingExecuter : MonoBehaviour
     [SerializeField] Transform endingPoint;
     [SerializeField] float dragToSpeed = 5f;
     [SerializeField] Transform bubbleTransform;
+    [SerializeField] Animator netAnimator;
 
     void OnEnable(){
         RealEndingEvent.OnRealEnding += DragBubbleToPoint;
@@ -24,6 +25,11 @@ public class RealEndingExecuter : MonoBehaviour
             bubbleTransform.position = Vector2.MoveTowards(bubbleTransform.position, endingPoint.position, dragToSpeed * Time.deltaTime);
             yield return null; //Wait for the next frame
         }
+        CallNet();
+    }
+
+    void CallNet(){
+        netAnimator.SetTrigger("Catch");
     }
 
     void OnDisable(){

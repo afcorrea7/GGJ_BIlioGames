@@ -419,6 +419,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f3eaac374cf17f04f86413fbd11f88fb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  scoreText: {fileID: 0}
+  finalScoreText: {fileID: 0}
+  finalScoreText2: {fileID: 0}
 --- !u!114 &81291496
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -977,7 +980,7 @@ SpriteRenderer:
   m_Size: {x: 45.1, y: 55.6}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 1
+  m_WasSpriteAssigned: 0
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
 --- !u!4 &420588751
@@ -3292,9 +3295,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5a2b0fc81b5d95749a9ef04b57a71cb7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  winPanel: {fileID: 1803382669}
   losePanel: {fileID: 1910489091}
   pausePanel: {fileID: 1940194080}
+  hudPanel: {fileID: 0}
 --- !u!114 &1211816669
 MonoBehaviour:
   m_ObjectHideFlags: 0
