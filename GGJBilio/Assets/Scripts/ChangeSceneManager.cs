@@ -43,7 +43,7 @@ public class ChangeSceneManager : MonoBehaviour
 
 
         //wait the animation time duration
-        yield return new WaitForSeconds(1.5f); // Ajusta el tiempo según la duración de la animación
+        yield return new WaitForSeconds(3f); // Ajusta el tiempo según la duración de la animación
 
         // Cambiar de escena
         LoadSceneByName(sceneToLoad);
