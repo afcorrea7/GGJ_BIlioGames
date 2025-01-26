@@ -8,6 +8,7 @@ using static BubbleDie;
 
 public class PanelManager : MonoBehaviour
 {
+    [SerializeField] private GameObject winPanel;
     [SerializeField] private GameObject losePanel;
     [SerializeField] private GameObject pausePanel;
 
@@ -23,14 +24,17 @@ public class PanelManager : MonoBehaviour
     }
     private void OnEnable()
     {
-        BubbleDie.PlayerLost += OnPlayerLost;
+        BubbleDie.OnPlayerLost += ActivateGameOverPanel;
+        WinZone.OnPlayerWin += ActivateWinPanel;
     }
 
     private void OnDisable()
     {
-        BubbleDie.PlayerLost -= OnPlayerLost;
+        BubbleDie.OnPlayerLost -= ActivateGameOverPanel;
+        WinZone.OnPlayerWin -= ActivateWinPanel;
+
     }
-    private void OnPlayerLost()
+    private void ActivateGameOverPanel()
     {
         Time.timeScale = 0f;
 
@@ -38,30 +42,42 @@ public class PanelManager : MonoBehaviour
         {
             losePanel.SetActive(true);
         }
-
     }
+
+    void ActivateWinPanel(){
+        if (winPanel != null){
+            winPanel.SetActive(true);
+        }
+    }
+
     private void TogglePause()
     {
         isPaused = !isPaused;
 
         if (isPaused)
         {
-            Time.timeScale = 0f;
-            if (pausePanel != null)
-                pausePanel.SetActive(true);
+            PauseGame();
         }
         else
         {
             ResumeGame();
         }
     }
+
+    public void PauseGame(){
+        Time.timeScale = 0f;
+        if (pausePanel != null){
+            pausePanel.SetActive(true);
+        }
+    }
+
     public void ResumeGame()
     {
         isPaused = false;
         Time.timeScale = 1f;
-        if (pausePanel != null)
+        if (pausePanel != null){
             pausePanel.SetActive(false);
-        Debug.Log("vOLVI AL JUEG0");
-
+        }
+        Debug.Log("VOLVI AL JUEG0");
     }
 }
