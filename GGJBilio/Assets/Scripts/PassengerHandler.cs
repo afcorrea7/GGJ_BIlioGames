@@ -12,5 +12,14 @@ public class PassengerHandler : MonoBehaviour
 
         //translate the passengerGroup position by a little bit to accomodate for the new bubble size
         passengerGroup.localPosition = new Vector2(passengerGroup.localPosition.x - (offset/3), 0f);
+
+        //Form the line of passengers
+        passengerGroup.gameObject.GetComponent<PassengerLine>().PositionPassengers();
+
+        CallBounceAnimation(); //animate the bubble getting larger
+    }
+
+    void CallBounceAnimation(){
+        GetComponentInChildren<BubbleAnimations>().CallBounceAnimation();
     }
 }

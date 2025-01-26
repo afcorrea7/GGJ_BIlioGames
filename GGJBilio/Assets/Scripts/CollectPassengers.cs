@@ -5,14 +5,13 @@ using UnityEngine;
 public class CollectPassengers : MonoBehaviour
 {
     [SerializeField] float weight;
-    [SerializeField] float bubbleRotationIncrease;
     [SerializeField] int scoreIncrease;
 
     void OnTriggerEnter2D(Collider2D other) {
         if(other.CompareTag("Player")){
-            BecomeChild(other.gameObject);
             IncreaseParentSize(other.gameObject);
-            Score.Instance.AddScore(scoreIncrease);
+            BecomeChild(other.gameObject);
+            Score.Instance?.AddScore(scoreIncrease);
         }
     }
 
