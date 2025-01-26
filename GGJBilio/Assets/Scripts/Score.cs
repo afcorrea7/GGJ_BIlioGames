@@ -1,15 +1,14 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.SceneManagement;
-using UnityEngine.UI;
 using TMPro;
 
 public class Score : MonoBehaviour
 {
-    public static Score Instance; // Referencia est�tica al ScoreManager
-    private TextMeshProUGUI scoreText; // El texto en el Canvas donde se mostrar� el puntaje
-    [SerializeField] private TextMeshProUGUI finalScoreText; // El texto en el Canvas donde se mostrar� el puntaje
+    public static Score Instance; // Referencia estática al ScoreManager
+
+    [SerializeField] private TextMeshProUGUI scoreText; // El texto en el Canvas donde se mostrará el puntaje actual
+    [SerializeField] private TextMeshProUGUI finalScoreText; // El texto en el Canvas donde se mostrará el puntaje final
+    [SerializeField] private TextMeshProUGUI finalScoreText2; // El texto en el Canvas donde se mostrará el puntaje final
 
     private int currentScore = 0; // Puntaje actual
 
@@ -26,22 +25,36 @@ public class Score : MonoBehaviour
         }
     }
 
-    void Start(){
-        scoreText = GetComponentInChildren<TextMeshProUGUI>();
-        finalScoreText = GetComponent<TextMeshProUGUI>();
-    }
-
-    // M�todo para agregar puntaje
+    // Método para agregar puntaje
     public void AddScore(int scoreToAdd)
     {
         currentScore += scoreToAdd;
         UpdateScoreUI();
     }
 
-    // Actualizamos el texto en el Canvas con el puntaje actual
+    // Actualizamos el texto en el Canvas con el puntaje actual y final
     private void UpdateScoreUI()
     {
-        scoreText.text = "Score: " + currentScore.ToString();
-        finalScoreText.text = "Score: " + currentScore.ToString();
+        if (scoreText != null)
+        {
+            scoreText.text = currentScore.ToString();
+        }
+
+        if (finalScoreText != null)
+        {
+            finalScoreText.text = currentScore.ToString();
+            finalScoreText2.text = currentScore.ToString();
+        }
+    }
+
+    // Método opcional para mostrar el puntaje final explícitamente (si es necesario)
+    public void ShowFinalScore()
+    {
+        if (finalScoreText != null)
+        {
+            finalScoreText.text = currentScore.ToString();
+            finalScoreText.gameObject.SetActive(true); // Asegúrate de que el texto esté activo
+            finalScoreText2.gameObject.SetActive(true); // Asegúrate de que el texto esté activo
+        }
     }
 }
