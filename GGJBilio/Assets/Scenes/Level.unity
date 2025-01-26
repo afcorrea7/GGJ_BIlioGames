@@ -2260,14 +2260,14 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 287892062}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0.9314097, w: -0.3639725}
   m_LocalPosition: {x: -19.5, y: 9.7, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 756303603}
   m_Father: {fileID: 1330967753}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: -222.689}
 --- !u!114 &287892064
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -11413,8 +11413,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   endingPoint: {fileID: 417798030}
   dragToSpeed: 5
-  bubbleTransform: {fileID: 0}
-  netAnimator: {fileID: 0}
+  bubbleTransform: {fileID: 259767919}
+  netAnimator: {fileID: 287892065}
 --- !u!4 &1330967753
 Transform:
   m_ObjectHideFlags: 0
@@ -16500,7 +16500,7 @@ AudioSource:
   SpatializePostEffects: 0
   Priority: 128
   DopplerLevel: 1
-  MinDistance: 1
+  MinDistance: 10
   MaxDistance: 50
   Pan2D: 0
   rolloffMode: 0
@@ -16585,7 +16585,7 @@ Transform:
   m_GameObject: {fileID: 2002456079}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.016949594, y: 2.3423262, z: 0.6302274}
+  m_LocalPosition: {x: -0.016949594, y: 341.2, z: 0.6302274}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
