@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Obstacle
   - Win Zone
+  - Wall
   layers:
   - Default
   - TransparentFX

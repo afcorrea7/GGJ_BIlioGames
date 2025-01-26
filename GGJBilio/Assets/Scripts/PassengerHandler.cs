@@ -15,5 +15,11 @@ public class PassengerHandler : MonoBehaviour
 
         //Form the line of passengers
         passengerGroup.gameObject.GetComponent<PassengerLine>().PositionPassengers();
+
+        CallBounceAnimation(); //animate the bubble getting larger
+    }
+
+    void CallBounceAnimation(){
+        GetComponentInChildren<BubbleAnimations>().CallBounceAnimation();
     }
 }
